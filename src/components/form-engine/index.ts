@@ -1,8 +1,6 @@
-// Public API — only what consumers need
-export { StepTracker } from "./StepTracker";
-export type { StepTrackerProps } from "./StepTracker";
+export { FormTracker } from "./FormTracker";
+export type { FormTrackerProps } from "./FormTracker";
 
-// Indicator variants
 export { BarStep } from "./indicators/BarStep";
 export { PillStep } from "./indicators/PillStep";
 export { CircleStep } from "./indicators/CircleStep";
@@ -13,9 +11,9 @@ export type { PillStepProps } from "./indicators/PillStep";
 export type { CircleStepProps } from "./indicators/CircleStep";
 export type { TimelineStepProps } from "./indicators/TimelineStep";
 
-export { useFlow } from "./hooks/use-flow";
-export { StepPanel } from "./StepPanel";
-export { StepLayout } from "./StepLayout";
-export { StepHeader } from "./StepHeader";
-export { StepActions } from "./StepActions";
+export { useFormRuntime } from "./hooks/use-form-runtime";
+export { FormViewport } from "./FormViewport";
+export { FormCanvas } from "./FormCanvas";
+export { FormManifest } from "./FormManifest";
+export { FormControls } from "./FormControls";
 export { FieldRenderer } from "./FieldRenderer";

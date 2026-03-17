@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { IconCheck } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
-import { useStepTracker } from "../StepTracker";
+import { useFormTracker } from "../FormTracker";
 
 // =============================================================================
 // TYPES
@@ -20,7 +20,7 @@ export interface BarStepProps {
 // =============================================================================
 
 export function BarStep({ index, children, className }: BarStepProps) {
-  const { currentStep } = useStepTracker();
+  const { currentStep } = useFormTracker();
 
   const stepNumber = index + 1;
   const isActive = stepNumber === currentStep;
@@ -33,7 +33,7 @@ export function BarStep({ index, children, className }: BarStepProps) {
         !isActive && !isCompleted && "bg-muted/30 border-muted",
         isActive && "bg-muted text-muted-foreground border-muted",
         isCompleted && "bg-primary text-white border-none",
-        className
+        className,
       )}
     >
       {/* Active pulse ring */}

@@ -8,14 +8,14 @@ import { cn } from "@/lib/utils";
 // TYPES
 // =============================================================================
 
-export interface StepTrackerProps {
+export interface FormTrackerProps {
   maxStep: number;
   step: number;
   children?: ReactNode;
   className?: string;
 }
 
-interface StepTrackerContextType {
+interface FormTrackerContextType {
   currentStep: number;
   maxStep: number;
 }
@@ -24,11 +24,11 @@ interface StepTrackerContextType {
 // CONTEXT
 // =============================================================================
 
-const StepTrackerContext = createContext<StepTrackerContextType | null>(null);
+const FormTrackerContext = createContext<FormTrackerContextType | null>(null);
 
-export function useStepTracker() {
-  const ctx = useContext(StepTrackerContext);
-  if (!ctx) throw new Error("useStepTracker must be used within StepTracker");
+export function useFormTracker() {
+  const ctx = useContext(FormTrackerContext);
+  if (!ctx) throw new Error("useFormTracker must be used within FormTracker");
   return ctx;
 }
 
@@ -36,16 +36,16 @@ export function useStepTracker() {
 // COMPONENT
 // =============================================================================
 
-export function StepTracker({
+export function FormTracker({
   step,
   maxStep,
   children,
   className,
-}: StepTrackerProps) {
+}: FormTrackerProps) {
   const hasChildren = React.Children.count(children) > 0;
 
   return (
-    <StepTrackerContext.Provider value={{ currentStep: step, maxStep }}>
+    <FormTrackerContext.Provider value={{ currentStep: step, maxStep }}>
       <div
         className={cn(
           "flex items-center gap-2 w-full justify-center",
@@ -62,8 +62,8 @@ export function StepTracker({
               />
             ))}
       </div>
-    </StepTrackerContext.Provider>
+    </FormTrackerContext.Provider>
   );
 }
 
-StepTracker.displayName = "StepTracker";
+FormTracker.displayName = "FormTracker";

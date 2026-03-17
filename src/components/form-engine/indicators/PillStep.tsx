@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useStepTracker } from "../StepTracker";
+import { useFormTracker } from "../FormTracker";
 
 // =============================================================================
 // TYPES
@@ -38,7 +38,7 @@ const PILL_VARIANTS = {
 // =============================================================================
 
 export function PillStep({ index, className, onClick }: PillStepProps) {
-  const { currentStep } = useStepTracker();
+  const { currentStep } = useFormTracker();
 
   const stepNumber = index + 1;
   const isActive = stepNumber === currentStep;
@@ -49,13 +49,19 @@ export function PillStep({ index, className, onClick }: PillStepProps) {
   return (
     <div
       onClick={onClick}
-      className={cn("relative py-4 flex items-center cursor-pointer", className)}
+      className={cn(
+        "relative py-4 flex items-center cursor-pointer",
+        className,
+      )}
     >
       <motion.div
         initial={false}
         animate={PILL_VARIANTS[variant]}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className={cn("h-1.5 rounded-full", PILL_VARIANTS[variant].backgroundColor)}
+        className={cn(
+          "h-1.5 rounded-full",
+          PILL_VARIANTS[variant].backgroundColor,
+        )}
       />
 
       {isActive && (

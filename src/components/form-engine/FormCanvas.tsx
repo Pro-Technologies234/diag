@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 // TYPES
 // =============================================================================
 
-export interface StepLayoutProps {
+export interface FormCanvasProps {
   header?: ReactNode;
   sidebar?: ReactNode;
   footer?: ReactNode;
@@ -20,13 +20,13 @@ export interface StepLayoutProps {
 // COMPONENT
 // =============================================================================
 
-export function StepLayout({
+export function FormCanvas({
   header,
   sidebar,
   children,
   footer,
   className,
-}: StepLayoutProps) {
+}: FormCanvasProps) {
   return (
     <section
       className={cn(
@@ -36,12 +36,10 @@ export function StepLayout({
     >
       {header && <header className="py-4 w-full">{header}</header>}
 
-      <div className="flex flex-col flex-1 justify-center items-center w-full">
-        {children}
-      </div>
+      <div className="flex flex-col flex-1 items-center w-full">{children}</div>
       {footer}
     </section>
   );
 }
 
-StepLayout.displayName = "StepLayout";
+FormCanvas.displayName = "FormCanvas";

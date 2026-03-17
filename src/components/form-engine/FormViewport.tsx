@@ -1,7 +1,6 @@
-// utilities/multistep/form-step.tsx
 "use client";
 
-import { PropsWithChildren, ReactNode } from "react";
+import { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -9,7 +8,7 @@ import { cn } from "@/lib/utils";
 // TYPES
 // =============================================================================
 
-export interface StepPanelProps {
+export interface FormViewportProps {
   when: number;
   step: number;
   unmount?: boolean;
@@ -21,13 +20,13 @@ export interface StepPanelProps {
 // COMPONENT
 // =============================================================================
 
-export function StepPanel({
+export function FormViewport({
   when,
   step,
   unmount = true,
   className,
   children,
-}: StepPanelProps) {
+}: FormViewportProps) {
   if (step !== when) {
     return unmount ? null : <div>{children}</div>;
   }
@@ -40,7 +39,7 @@ export function StepPanel({
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: -20, opacity: 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={cn("w-full", className)}
+        className={cn("w-full space-y-4", className)}
       >
         {children}
       </motion.div>
@@ -48,4 +47,4 @@ export function StepPanel({
   );
 }
 
-StepPanel.displayName = "StepPanel";
+FormViewport.displayName = "FormViewport";

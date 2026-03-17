@@ -1,32 +1,26 @@
-import { Field } from "@base-ui/react";
-import { ReactNode } from "react";
-import { CardSelectProps } from "../../controls/CardSelect";
-import { ChipSelectProps } from "../../controls/ChipSelect";
-import { SelectFieldProps } from "../../controls/SelectField";
-
 // =============================================================================
 // ENUMS & LITERAL UNIONS
 // =============================================================================
-/** Variant-specific props e.g. options for card-select, type for text */
+
+import { ReactNode } from "react";
+import { CardSelectProps } from "../controls/CardSelect";
+import { ChipSelectProps } from "../controls/ChipSelect";
+import { SelectFieldProps } from "../controls/SelectField";
+import { RadioSelectProps } from "../controls/RadioSelect";
+import { OTPFieldProps } from "../controls/OtpField";
+
 export type FieldVariant =
   | { variant: "text"; componentProps?: never }
   | { variant: "number"; componentProps?: never }
+  | { variant: "otp"; componentProps?: OTPFieldProps }
   | { variant: "rich-text"; componentProps?: never }
   | { variant: "checkbox"; componentProps?: never }
+  | { variant: "radio"; componentProps?: RadioSelectProps }
   | { variant: "card-select"; componentProps?: CardSelectProps }
   | { variant: "chip-select"; componentProps?: ChipSelectProps }
   | { variant: "select"; componentProps?: SelectFieldProps }
   | { variant: "file-upload"; componentProps?: never }
   | { variant: "date"; componentProps?: never };
-
-// {
-//   options?: CardSelectOption[] | SelectOption[];
-//   type?: string;
-//   multiple?: boolean;
-//   max?: number;
-//   accept?: string;
-//   [key: string]: unknown;
-// };
 
 export type FormLayout = "flow" | "panel" | "wizard";
 
@@ -36,29 +30,9 @@ export type GridSpan = 1 | 2;
 // ATOMIC TYPES
 // =============================================================================
 
-export interface CardSelectOption<T = string> {
-  value: T;
-  label: string;
-  description?: string;
-  icon?: ReactNode;
-  preview?: string | ReactNode;
-  badge?: string;
-  disabled?: boolean;
-}
-
 export interface SelectOption {
   label: string;
   value: string;
-}
-
-export interface ChipOption {
-  value: string;
-  label: string;
-  icon?: ReactNode;
-  description?: string;   // shows in shadcn Tooltip on hover
-  badge?: string | number;
-  disabled?: boolean;
-  color?: string;         // overrides active bg color e.g. "#FF4560"
 }
 
 export type BaseFieldConfig = {
@@ -103,7 +77,7 @@ export type FieldConfig = BaseFieldConfig & FieldVariant;
 // STEP CONFIG
 // =============================================================================
 
-export interface StepConfig {
+export interface FormEngineConfig {
   /** Step order — 1-based */
   order: number;
 
@@ -141,9 +115,9 @@ export type CustomRenderers = Record<
 // COMPONENT PROP TYPES
 // =============================================================================
 
-export interface MultiStepFormProps {
+export interface FormEngineProps {
   /** Step configuration array */
-  config: StepConfig[];
+  config: FormEngineConfig[];
 
   /** Form layout mode */
   layout?: FormLayout;

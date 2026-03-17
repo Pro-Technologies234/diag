@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 // TYPES
 // =============================================================================
 
-export interface StepHeaderProps {
+export interface FormManifestProps {
   title?: string;
   description?: string;
   visual?: ReactNode;
@@ -19,13 +19,13 @@ export interface StepHeaderProps {
 // COMPONENT
 // =============================================================================
 
-export function StepHeader({
+export function FormManifest({
   title,
   description,
   visual,
   addons,
   className,
-}: StepHeaderProps) {
+}: FormManifestProps) {
   return (
     <div
       className={cn(
@@ -60,4 +60,4 @@ export function StepHeader({
   );
 }
 
-StepHeader.displayName = "StepHeader";
+FormManifest.displayName = "FormManifest";

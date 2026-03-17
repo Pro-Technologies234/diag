@@ -16,11 +16,11 @@ import { FormLayout } from "./types";
 // TYPES
 // =============================================================================
 
-export interface StepActionsProps {
+export interface FormControlsProps {
   isFirst: boolean;
   isLast: boolean;
   loading?: boolean;
-  onBack: () => void;
+  onBack?: () => void;
   onNext: () => void;
   submitLabel?: string;
   nextLabel?: string;
@@ -93,7 +93,7 @@ const layoutConfig = {
 // COMPONENT
 // =============================================================================
 
-export function StepActions({
+export function FormControls({
   isFirst,
   isLast,
   loading,
@@ -106,7 +106,7 @@ export function StepActions({
   layout = "flow",
   hideBackOnFirst = true,
   styles,
-}: StepActionsProps) {
+}: FormControlsProps) {
   const config = layoutConfig[layout];
   const showBack = !isFirst || !hideBackOnFirst;
 
@@ -219,4 +219,4 @@ export function StepActions({
   );
 }
 
-StepActions.displayName = "StepActions";
+FormControls.displayName = "FormControls";

@@ -3,12 +3,14 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { FieldConfig } from "./types";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { Label } from "@/components/ui/label";
-import { CardSelect } from "../../controls/CardSelect";
-import { ChipSelect } from "../../controls/ChipSelect";
-import { SelectField } from "../../controls/SelectField";
+import { SelectField } from "../controls/SelectField";
+import { CardSelect } from "../controls/CardSelect";
+import { ChipSelect } from "../controls/ChipSelect";
+import { RadioSelect } from "../controls/RadioSelect";
+import { OTPField } from "../controls/OtpField";
 // import { IconFileUpload, IconLoader } from "@tabler/icons-react";
 
 // import { MediaPreview } from "../../media/media-preview";
@@ -121,6 +123,25 @@ export function FieldRenderer({ field, className }: FieldRendererProps) {
                 <SelectField
                   {...field.componentProps}
                   options={field.componentProps?.options || []}
+                  defaultValue={value}
+                  onChange={onChange}
+                  className={spanClass}
+                />
+              );
+            case "radio":
+              return (
+                <RadioSelect
+                  {...field.componentProps}
+                  options={field.componentProps?.options || []}
+                  defaultValue={value}
+                  onChange={onChange}
+                  className={spanClass}
+                />
+              );
+            case "otp":
+              return (
+                <OTPField
+                  {...field.componentProps}
                   defaultValue={value}
                   onChange={onChange}
                   className={spanClass}

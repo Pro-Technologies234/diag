@@ -1,8 +1,7 @@
-// utilities/multistep/use-multistep.ts
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
-import { FieldConfig, StepConfig } from "../types";
+import { FormEngineConfig } from "../types";
 
 // =============================================================================
 // GUARDS
@@ -18,9 +17,9 @@ export type StepGuard<TFields extends string = string> = (
 // HOOK OPTIONS
 // =============================================================================
 
-export interface MultiStepOptions<TFields extends string = string> {
+export interface FormRuntimeOptions<TFields extends string = string> {
   /** Total number of steps */
-  config?: StepConfig[];
+  config?: FormEngineConfig[];
   /** Total number of steps */
   steps: number;
 
@@ -33,13 +32,13 @@ export interface MultiStepOptions<TFields extends string = string> {
   /** Called when the user submits the final step */
   onFinalSubmit?: () => Promise<void> | void;
 }
-export function useFlow<TFields extends string = string>({
+export function useFormRuntime<TFields extends string = string>({
   initialStep = 1,
   steps,
   guards = {},
   config,
   onFinalSubmit,
-}: MultiStepOptions<TFields>) {
+}: FormRuntimeOptions<TFields>) {
   const [step, setStep] = useState(initialStep);
   const [loading, setLoading] = useState(false);
 
@@ -53,6 +52,9 @@ export function useFlow<TFields extends string = string>({
     const currentStepFields = config?.find(({ order }) => order === step);
     const fieldsToValidate: TFields[] =
       currentStepFields?.fields.map((f) => f.path as TFields) ?? [];
+
+    console.log("Step:", step);
+    console.log("Fields to validate:", fieldsToValidate);
     if (guards[step]) {
       const valid = await guards[step](fieldsToValidate);
       if (!valid) return;
